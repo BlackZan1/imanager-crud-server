@@ -12,12 +12,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors({ allowedHeaders: ['Content-Type', 'Authorization'], methods: ['POST'] }));
 
-// app.use('/api', GraphqlHTTP({
-//     schema: GraphqlSchema,
-//     rootValue: GraphqlResolvers,
-//     graphiql: true
-// }))
-
 const server = new ApolloServer({
     typeDefs: GraphqlSchema,
     resolvers: GraphqlResolvers,
@@ -36,6 +30,7 @@ mongoose.connect(
 
         throw err;
     }
+    
     console.log('mongoDB is connected');
 
     server.applyMiddleware({ app });
