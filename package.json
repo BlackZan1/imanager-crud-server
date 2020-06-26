@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "devStart": "nodemon --exec babel-node app.js",
+    "build": "babel app.js -d dist",
     "start": "node app.js"
   },
   "keywords": [],

@@ -1,41 +1,47 @@
-import { ApolloServer } from 'apollo-server-express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import express from 'express';
-import mongoose from 'mongoose';
+"use strict";
 
-import GraphqlSchema from './graphql/schema';
-import GraphqlResolvers from './graphql/resolvers';
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-const app = express();
+var _apolloServerExpress = require("apollo-server-express");
 
-app.use(bodyParser.json());
-app.use(cors({ allowedHeaders: ['Content-Type', 'Authorization'], methods: ['POST'] }));
+var _bodyParser = _interopRequireDefault(require("body-parser"));
 
-const server = new ApolloServer({
-    typeDefs: GraphqlSchema,
-    resolvers: GraphqlResolvers,
-    tracing: true
-})
+var _cors = _interopRequireDefault(require("cors"));
 
-mongoose.connect(
-    process.env.MONGO_URL, 
-    {
-        useNewUrlParser: true,
-        useFindAndModify: true
-    }, 
-    (err) => {
-    if(err) {
-        console.log(err);
+var _express = _interopRequireDefault(require("express"));
 
-        throw err;
-    }
-    
-    console.log('mongoDB is connected');
+var _mongoose = _interopRequireDefault(require("mongoose"));
 
-    server.applyMiddleware({ app });
+var _schema = _interopRequireDefault(require("./graphql/schema"));
 
-    app.listen(process.env.PORT || 3000, () => {
-        console.log(`Server is running at http://localhost:${process.env.PORT}${server.graphqlPath}`);
-    })
-})
+var _resolvers = _interopRequireDefault(require("./graphql/resolvers"));
+
+const app = (0, _express.default)();
+app.use(_bodyParser.default.json());
+app.use((0, _cors.default)({
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['POST']
+}));
+const server = new _apolloServerExpress.ApolloServer({
+  typeDefs: _schema.default,
+  resolvers: _resolvers.default,
+  tracing: true
+});
+
+_mongoose.default.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useFindAndModify: true
+}, err => {
+  if (err) {
+    console.log(err);
+    throw err;
+  }
+
+  console.log('mongoDB is connected');
+  server.applyMiddleware({
+    app
+  });
+  app.listen(process.env.PORT || 3000, () => {
+    console.log(`Server is running at http://localhost:${process.env.PORT}${server.graphqlPath}`);
+  });
+});
