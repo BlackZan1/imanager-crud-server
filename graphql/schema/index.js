@@ -1,6 +1,6 @@
-import { gql } from 'apollo-server-express';
+const { gql } = require('apollo-server-express');
 
-export default gql(`
+module.exports = gql(`
     type Query {
         user(id: ID!): User!
         users(skip: Int = 0, limit: Int = 10): [User]
