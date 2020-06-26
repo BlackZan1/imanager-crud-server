@@ -4,7 +4,8 @@
   "description": "Server side of CRUD app",
   "main": "app.js",
   "scripts": {
-    "devStart": "nodemon --exec babel-node app.js"
+    "devStart": "nodemon --exec babel-node app.js",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
