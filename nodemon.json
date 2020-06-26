@@ -1,0 +1,6 @@
+{
+    "env": {
+        "PORT": 3366,
+        "MONGO_URL": "mongodb+srv://Nazar:g10BysWaHoybY8N4@clusterdb-s9piv.mongodb.net/CRUD_users"
+    }
+}
